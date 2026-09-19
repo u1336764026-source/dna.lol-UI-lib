@@ -666,10 +666,17 @@ local Library = {
         return Success, Result
     end
 
-    Library.Round = function(Self, Number, Float)
-        local Multiplier = 1 / (Float or 1)
-        return math.floor(Number * Multiplier) / Multiplier
+Library.Round = function(Self, Number, Decimals)
+    Number = tonumber(Number) or 0
+    Decimals = tonumber(Decimals) or 0
+
+    if Decimals <= 0 then
+        return math.floor(Number + 0.5)
     end
+
+    local Multiplier = 10 ^ Decimals
+    return math.floor(Number * Multiplier + 0.5) / Multiplier
+end
 
     Library.GetConfig = function(Self)
         local Config = { }
