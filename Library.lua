@@ -3548,56 +3548,85 @@ local Library = {
             end)
 
             function Slider:Set(Value)
-                Slider.Value = Library:Round(math.clamp(Value, Slider.Min, Slider.Max), Slider.Decimals)
+    Value = tonumber(Value) or Slider.Min
 
-                Items["Accent"]:Tween({Size = UDim2.new((Slider.Value - Slider.Min) / (Slider.Max - Slider.Min), 0, 1, 0)}, TweenInfo.new(Library.Animation.Time, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out))
-                Items["Value"].Instance.Text = string.format("%s%s", Slider.Value, Slider.Suffix)
+    local Range = Slider.Max - Slider.Min
+    local Percent = 0
 
-                Flags[Slider.Flag] = Slider.Value
-                Library:SafeCall(Slider.Callback, Slider.Value)
+    if Range ~= 0 then
+        Slider.Value = Library:Round(
+            math.clamp(Value, Slider.Min, Slider.Max),
+            Slider.Decimals
+        )
+
+        Percent = (Slider.Value - Slider.Min) / Range
+    else
+        Slider.Value = Slider.Min
+    end
+
+    Items["Accent"]:Tween({
+        Size = UDim2.new(Percent, 0, 1, 0)
+    }, TweenInfo.new(
+        Library.Animation.Time,
+        Enum.EasingStyle.Exponential,
+        Enum.EasingDirection.Out
+    ))
+
+    Items["Value"].Instance.Text =
+        string.format("%s%s", Slider.Value, Slider.Suffix)
+
+    Flags[Slider.Flag] = Slider.Value
+    Library:SafeCall(Slider.Callback, Slider.Value)
+end
+
+function Slider:SetVisibility(Bool)
+    Items["Slider"].Instance.Visible = Bool
+end
+
+function Slider:GetSize(Input)
+    local SizeX = (Input.Position.X - Items["RealSlider"].Instance.AbsolutePosition.X)
+        / Items["RealSlider"].Instance.AbsoluteSize.X
+
+    local Value = ((Slider.Max - Slider.Min) * SizeX) + Slider.Min
+    return Value
+end
+
+function Slider:SetText(Text)
+    Items["Text"].Instance.Text = tostring(Text)
+end
+
+local InputChanged
+
+Items["RealSlider"]:Connect("InputBegan", function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton1
+        or Input.UserInputType == Enum.UserInputType.Touch then
+
+        Items["Value"]:Tween({
+            TextColor3 = Library.Theme.Text
+        })
+
+        Slider.Sliding = true
+
+        local Value = Slider:GetSize(Input)
+        Slider:Set(Value)
+
+        if InputChanged then
+            return
+        end
+
+        InputChanged = Input.Changed:Connect(function()
+            if Input.UserInputState == Enum.UserInputState.End then
+                Items["Value"]:Tween({
+                    TextColor3 = Library.Theme["Inactive Text"]
+                })
+
+                Slider.Sliding = false
+                InputChanged:Disconnect()
+                InputChanged = nil
             end
-
-            function Slider:SetVisibility(Bool)
-                Items["Slider"].Instance.Visible = Bool
-            end
-
-            function Slider:GetSize(Input)
-                local SizeX = (Input.Position.X - Items["RealSlider"].Instance.AbsolutePosition.X) / Items["RealSlider"].Instance.AbsoluteSize.X
-                local Value = ((Slider.Max - Slider.Min) * SizeX) + Slider.Min
-
-                return Value
-            end
-
-            function Slider:SetText(Text)
-                Items["Text"].Instance.Text = tostring(Text)
-            end
-
-            local InputChanged 
-            
-            Items["RealSlider"]:Connect("InputBegan", function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                    Items["Value"]:Tween({TextColor3 = Library.Theme.Text})
-                    Slider.Sliding = true
-
-                    local Value = Slider:GetSize(Input)
-
-                    Slider:Set(Value)
-
-                    if InputChanged then
-                        return
-                    end
-
-                    InputChanged = Input.Changed:Connect(function()
-                        if Input.UserInputState == Enum.UserInputState.End then
-                            Items["Value"]:Tween({TextColor3 = Library.Theme["Inactive Text"]})
-                            Slider.Sliding = false
-
-                            InputChanged:Disconnect()
-                            InputChanged = nil
-                        end
-                    end)
-                end
-            end)
+        end)
+    end
+end)
 
             Library:Connect(UserInputService.InputChanged, function(Input)
                 if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
