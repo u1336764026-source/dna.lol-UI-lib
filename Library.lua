@@ -1,8 +1,17 @@
 --[[
     Code is not as clean as it could be but it works
     
-    Made by samet, fixed by vaught
-    
+    Made by samet
+    This is a FREE ui release made by me (samet) on May 30 to celebrate my birthday, If anyone is selling this they are scammers.
+    The design credits for the ui goes to eskolzz. It was brought to life in luau by me.
+
+    MY ONLY ACCOUNT IS: joestar._3
+
+    If you want to commission a ui:
+    https://discord.gg/XsTteAwprs
+
+    Please give credit if used or modified.
+]]
 
 if getgenv().Library then
     getgenv().Library:Exit()
@@ -657,17 +666,10 @@ local Library = {
         return Success, Result
     end
 
-Library.Round = function(Self, Number, Decimals)
-    Number = tonumber(Number) or 0
-    Decimals = tonumber(Decimals) or 0
-
-    if Decimals <= 0 then
-        return math.floor(Number + 0.5)
+    Library.Round = function(Self, Number, Float)
+        local Multiplier = 1 / (Float or 1)
+        return math.floor(Number * Multiplier) / Multiplier
     end
-
-    local Multiplier = 10 ^ Decimals
-    return math.floor(Number * Multiplier + 0.5) / Multiplier
-end
 
     Library.GetConfig = function(Self)
         local Config = { }
