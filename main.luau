@@ -120,10 +120,10 @@ Library.NotificationLimit = 5
 Library.Dirty = false
 Library.BaseUrl = "https://raw.githubusercontent.com/u1336764026-source/dna.lol-UI-lib/refs/heads/main/"
 Library.AddonPaths = {
-	Icons = "addons/Icons.luau",
+	Icons = "Icons.luau",
 	SaveManager = "SaveManager.luau",
-	InterfaceManager = "addons/InterfaceManager.luau",
-	ThemeManager = "addons/ThemeManager.luau",
+	InterfaceManager = "InterfaceManager.luau",
+	ThemeManager = "ThemeManager.luau",
 }
 Library.Addons = {}
 Library.Painted = Painted
