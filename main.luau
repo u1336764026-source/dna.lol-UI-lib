@@ -138,7 +138,7 @@ function Library:SafeCallback(label, callback, ...)
 		local message = tostring(err)
 		local _, cut = string.find(message, ":%d+: ")
 		if cut then message = string.sub(message, cut + 1) end
-		warn("Facility | callback error in '" .. tostring(label) .. "': " .. tostring(err))
+		warn("dna.lol | callback error in '" .. tostring(label) .. "': " .. tostring(err))
 		self:Error("callback error", tostring(label) .. " - " .. message, 7)
 	end)
 end
@@ -165,7 +165,7 @@ function Library:LoadAddon(name)
 	if module == nil then
 		local path = self.AddonPaths[name]
 		if not path then
-			warn("Facility | unknown addon '" .. tostring(name) .. "'")
+			warn("dna.lol | unknown addon '" .. tostring(name) .. "'")
 			return nil
 		end
 		local fetched, source = pcall(function() return game:HttpGet(self.BaseUrl .. path) end)
@@ -179,7 +179,7 @@ function Library:LoadAddon(name)
 	end
 
 	if module == nil then
-		warn("Facility | addon '" .. tostring(name) .. "' unavailable")
+		warn("dna.lol | addon '" .. tostring(name) .. "' unavailable")
 		return nil
 	end
 	if type(module) == "function" then
@@ -201,7 +201,7 @@ end
 
 function Library:Repaint()
 	if #Painted == 0 then
-		warn("Facility | repaint registry is empty, main.luau is probably outdated")
+		warn("dna.lol | repaint registry is empty, main.luau is probably outdated")
 	end
 	IndexTheme()
 	for i = #Painted, 1, -1 do
@@ -229,7 +229,7 @@ end
 
 function Library:Register(flag, entry)
 	if self.Registry[flag] then
-		warn("Facility | duplicate flag '" .. tostring(flag) .. "', the previous element will no longer be saved")
+		warn("dna.lol | duplicate flag '" .. tostring(flag) .. "', the previous element will no longer be saved")
 	end
 	self.Registry[flag] = entry
 	self.Defaults[flag] = entry.Get()
@@ -2633,7 +2633,7 @@ function Window:Modal(opts)
 			if api.Blur then return end
 			pcall(function()
 				local blur = Instance.new("BlurEffect")
-				blur.Name = "FacilityModalBlur"
+				blur.Name = "dna.lolModalBlur"
 				blur.Size = 0
 				blur.Parent = Lighting
 				api.Blur = blur
@@ -2768,7 +2768,7 @@ function Library:Window(opts)
 	local height = opts.Height or 560
 
 	local gui = New("ScreenGui", {
-		Name = opts.Name or "Facility",
+		Name = opts.Name or "dna.lol",
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		AutoLocalize = false,
@@ -2814,7 +2814,7 @@ function Library:Window(opts)
 	local titleList = List(title, 0, Enum.FillDirection.Horizontal)
 	titleList.VerticalAlignment = Enum.VerticalAlignment.Center
 
-	local titleName = Label(title, opts.Title or "facility", Theme.TextBright, 14, Theme.FontMedium)
+	local titleName = Label(title, opts.Title or "dna.lol", Theme.TextBright, 14, Theme.FontMedium)
 	titleName.Size = UDim2.new(0, 0, 1, 0)
 	titleName.AutomaticSize = Enum.AutomaticSize.X
 
@@ -3128,7 +3128,7 @@ function Library:Notify(opts, text, duration)
 	end
 	if not self.NotifyGui then
 		local gui = New("ScreenGui", {
-			Name = "FacilityNotifications",
+			Name = "dna.lolNotifications",
 			ResetOnSpawn = false,
 			IgnoreGuiInset = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -3272,7 +3272,7 @@ function Library:Panel(opts)
 	opts = opts or {}
 
 	local gui = New("ScreenGui", {
-		Name = opts.Name or "FacilityPanel",
+		Name = opts.Name or "dna.lolPanel",
 		ResetOnSpawn = false,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -3517,7 +3517,7 @@ function Library:CreateHotkeyPanel(opts)
 	opts = opts or {}
 
 	local gui = New("ScreenGui", {
-		Name = "FacilityHotkeys",
+		Name = "dna.lolHotkeys",
 		ResetOnSpawn = false,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -3672,7 +3672,7 @@ function Library:CreateCursor(opts)
 	local gap = opts.Gap or 4
 
 	local gui = New("ScreenGui", {
-		Name = "FacilityCursor",
+		Name = "dna.lolCursor",
 		ResetOnSpawn = false,
 		IgnoreGuiInset = true,
 		AutoLocalize = false,
@@ -3752,7 +3752,7 @@ function Library:CreateMobileButton(opts)
 	opts = opts or {}
 
 	local gui = New("ScreenGui", {
-		Name = "FacilityToggle",
+		Name = "dna.lolToggle",
 		ResetOnSpawn = false,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -3934,7 +3934,7 @@ end
 Library.FileSystem = FileSystem
 
 if getgenv then
-	pcall(function() getgenv().Facility = Library end)
+	pcall(function() getgenv().dna.lol = Library end)
 end
 Library.SaveManager = Library:LoadAddon("SaveManager")
 Library.InterfaceManager = Library:LoadAddon("InterfaceManager")
