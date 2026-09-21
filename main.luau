@@ -110,7 +110,7 @@ Library.Flags = {}
 Library.Windows = {}
 Library.Connections = {}
 Library.Open = true
-Library.ToggleKey = Enum.KeyCode.RightShift
+Library.ToggleKey = getgenv().dna.Options.MenuKey = key
 Library.ToggleInput = nil
 Library.Binding = false
 Library.Registry = {}
