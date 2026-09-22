@@ -36,35 +36,35 @@ local function ParentGui(gui)
 end
 
 local Theme = {
-	Window        = Color3.fromRGB(26, 26, 28),
-	WindowAlpha   = 0.012,
-	WindowBorder  = Color3.fromRGB(52, 52, 56),
-	TopBar        = Color3.fromRGB(31, 31, 34),
-	Section       = Color3.fromRGB(29, 29, 32),
-	SectionBorder = Color3.fromRGB(46, 46, 50),
-	Group         = Color3.fromRGB(34, 34, 37),
-	GroupBorder   = Color3.fromRGB(54, 54, 58),
-	Field         = Color3.fromRGB(40, 40, 44),
-	FieldHover    = Color3.fromRGB(48, 48, 52),
-	Border        = Color3.fromRGB(60, 60, 65),
-	BorderSoft    = Color3.fromRGB(45, 45, 49),
-	PopupBg       = Color3.fromRGB(38, 38, 42),
-	PopupBorder   = Color3.fromRGB(62, 62, 67),
-	Track         = Color3.fromRGB(58, 58, 62),
-	Text          = Color3.fromRGB(174, 174, 178),
-	TextDim       = Color3.fromRGB(108, 108, 113),
-	TextBright    = Color3.fromRGB(228, 228, 232),
-	TextMarked    = Color3.fromRGB(198, 198, 122),
-	TextCode      = Color3.fromRGB(96, 200, 96),
-	Danger        = Color3.fromRGB(226, 102, 102),
-	Accent        = Color3.fromRGB(81, 81, 255),
-	AccentSoft    = Color3.fromRGB(131, 131, 255),
-	AccentDim     = Color3.fromRGB(92, 88, 154),
-	Font          = Enum.Font.Gotham,
-	FontMedium    = Enum.Font.GothamMedium,
-	TextSize      = 13,
-	Radius        = 6,
-	GearIcon      = "rbxassetid://6031280882",
+    Window        = Color3.fromRGB(10, 10, 12),
+    WindowAlpha   = 0.012,
+    WindowBorder  = Color3.fromRGB(24, 24, 28),
+    TopBar        = Color3.fromRGB(14, 14, 16),
+    Section       = Color3.fromRGB(14, 14, 16),
+    SectionBorder = Color3.fromRGB(22, 22, 26),
+    Group         = Color3.fromRGB(18, 18, 22),
+    GroupBorder   = Color3.fromRGB(28, 28, 32),
+    Field         = Color3.fromRGB(22, 22, 26),
+    FieldHover    = Color3.fromRGB(32, 32, 38),
+    Border        = Color3.fromRGB(38, 38, 44),
+    BorderSoft    = Color3.fromRGB(22, 22, 26),
+    PopupBg       = Color3.fromRGB(18, 18, 22),
+    PopupBorder   = Color3.fromRGB(40, 40, 48),
+    Track         = Color3.fromRGB(45, 45, 52),
+    Text          = Color3.fromRGB(180, 180, 190),
+    TextDim       = Color3.fromRGB(110, 110, 120),
+    TextBright    = Color3.fromRGB(230, 230, 235),
+    TextMarked    = Color3.fromRGB(198, 198, 122),
+    TextCode      = Color3.fromRGB(96, 200, 96),
+    Danger        = Color3.fromRGB(226, 102, 102),
+    Accent        = Color3.fromRGB(131, 131, 255),
+    AccentSoft    = Color3.fromRGB(155, 155, 255),
+    AccentDim     = Color3.fromRGB(90, 90, 165),
+    Font          = Enum.Font.Gotham,
+    FontMedium    = Enum.Font.GothamMedium,
+    TextSize      = 13,
+    Radius        = 6,
+    GearIcon      = "rbxassetid://6031280882",
 }
 
 local function AccentHex()
@@ -2871,7 +2871,7 @@ function Library:Window(opts)
 			ElasticBehavior = Enum.ElasticBehavior.Never,
 			Parent = topBar,
 		})
-		local tabList = List(tabBar, 18, Enum.FillDirection.Horizontal)
+		local tabList = List(tabBar, 25, Enum.FillDirection.Horizontal)
 		tabList.VerticalAlignment = Enum.VerticalAlignment.Center
 
 		layoutTabs = function()
