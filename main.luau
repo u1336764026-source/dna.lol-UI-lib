@@ -1226,7 +1226,7 @@ function Elements:Dropdown(opts)
 		Size = UDim2.new(1, 0, 0, 24),
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		CanvasSize = UDim2.new(),
-		ScrollBarThickness = 6,
+		ScrollBarThickness = 11,
 		ScrollBarImageColor3 = Theme.AccentDim,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
